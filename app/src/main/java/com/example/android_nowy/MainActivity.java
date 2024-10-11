@@ -40,10 +40,26 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "Wybrano tak", Toast.LENGTH_SHORT).show();
+                        if (pytania.get(numerWyswietlanegoPytania).isPoprawnaOdpowiedz()){
+                            pytania.get(numerWyswietlanegoPytania).setCzyOdpPop(true);
+                            Toast.makeText(MainActivity.this, "Poprawna odpowiedź", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
+        );
+        buttonN.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(pytania.get(numerWyswietlanegoPytania).isPoprawnaOdpowiedz());
+                        pytania.get(numerWyswietlanegoPytania).setCzyOdpPop(true);
+                        Toast.makeText(MainActivity.this, "Poprawna odpowiedź", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Zła odpowiedź", Toast.LENGTH_SHORT).show();
+                    }
+                }
         );
 
         buttonNastepny.setOnClickListener(
@@ -65,4 +81,14 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
+    private int podliczPkt(){
+        int suma = 0;
+        for (Pytanie pytanko:pytania){
+            if(pytanko.isCzyOdpPop()){
+                suma++;
+            }
+        }
+        return suma;
+    }
+
 }
